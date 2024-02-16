@@ -1,0 +1,28 @@
+
+.luckiest-guy-regular {
+    font-family: "Luckiest Guy", cursive;
+    font-style: normal;
+    color: white;
+    text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-crear {
+    font-family: "Luckiest Guy", cursive;
+    font-style: normal;
+    text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    font-size: 25px;
+    background-color: #C89CFF;
+    color: white;
+    border-width: 0;
+    padding: 10px 15px;
+}
+
+.titulo p {
+    font-size: 50px;
+}
