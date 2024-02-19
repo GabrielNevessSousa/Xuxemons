@@ -21,8 +21,40 @@
     color: white;
     border-width: 0;
     padding: 10px 15px;
+    cursor: pointer;
 }
 
 .titulo p {
     font-size: 50px;
+}
+
+table {
+    table-layout: fixed;
+    width: 1000px;
+    border-collapse: collapse;
+    color: white;
+    background-color: rgb(92, 92, 92);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+  
+th,
+td {
+    padding: 15px;
+    border: 1px solid white;
+}
+
+.tabla {
+    align-items: center;
+}
+
+.tabla button {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+table button {
+    width: 90px;
+    height: 40px;
+    font-family: "Luckiest Guy", cursive;
+    font-size: 18px;
+    
 }
