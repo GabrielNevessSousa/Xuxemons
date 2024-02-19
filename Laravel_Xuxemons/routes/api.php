@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('registro', [RegistroController::class, 'store'])->name('registro.store');
+Route::get('registro/{id}', [RegistroController::class, 'show'])->name('registro.show');
+Route::delete('registro/{id}', [RegistroController::class, 'destroy'])->name('registro.destroy');
