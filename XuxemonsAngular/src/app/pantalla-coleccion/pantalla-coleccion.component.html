@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
-<body style="margin: 0">
+<body>
     <header>
         <div class="left-content">
             <a class="logo" href=""><img style="width: 100px; height: 100px;" src="assets/xuxemons-logo.png"></a>
@@ -25,9 +25,17 @@
     </header>    
     <main>
         <div class="pantalla-principal">
-           
-        </div>
+            <div *ngFor="let xuxemon of xuxemonsArray" class="contenedor">
+                 <p style="font-size: 19px;">{{ xuxemon.tamano }}</p>
+                 <img [src]="xuxemon.img">
+                 <div class="texto-container">
+                     <p style="font-size: 22px;">{{ xuxemon.nombre }}</p>
+                     <p *ngIf="xuxemon.tipo === 'Tierra'" style="font-size: 20px; color: rgb(179, 143, 97);">{{ xuxemon.tipo }}</p>
+                     <p *ngIf="xuxemon.tipo === 'Agua'" style="font-size: 20px; color: rgb(64, 189, 247);">{{ xuxemon.tipo }}</p>
+                     <p *ngIf="xuxemon.tipo === 'Fuego'" style="font-size: 20px; color: rgb(240, 100, 44);">{{ xuxemon.tipo }}</p>
+                 </div>
+            </div>
+         </div>
     </main>
-
 </body>
 </html>
