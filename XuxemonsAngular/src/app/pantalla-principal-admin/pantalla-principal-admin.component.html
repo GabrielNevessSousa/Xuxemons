@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset='utf-8'>
-    <title>Pantalla Admin</title>
+    <title>Pantalla Principal</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='pantalla-principal-admin.component.css'>
     <script src='main.js'></script>
@@ -11,50 +11,100 @@
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <div class="titulo">
-            <div class="tabla">
-                <p class="luckiest-guy-regular" style="margin-left: 200px;">PANTALLA ADMINISTRADOR</p>
-                <button class="boton-crear" style="margin-left: 440px;">Crear</button><br><br>
-                <table>
-                    <tr>
-                      <td>Nombre</td>
-                      <td>Tipo</td>
-                      <td>Peso</td>
-                      <td>Editar</td>
-                      <td>Eliminar</td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td><button>Editar</button></td>
-                      <td><button>Eliminar</button></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td><button>Editar</button></td>
-                      <td><button>Eliminar</button></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td><button>Editar</button></td>
-                      <td><button>Eliminar</button></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td><button>Editar</button></td>
-                      <td><button>Eliminar</button></td>
-                      </tr>
-                  </table>
+    <header>
+        <div class="left-content">
+            <a class="logo" href=""><img style="width: 100px; height: 100px;" src="assets/xuxemons-logo.png"></a>
+            <p class="luckiest-guy-regular">XUXEMONS</p>
+        </div>
+        <div class="right-content">
+            <p class="luckiest-guy-regular">100</p>
+            <div class="icons">
+                <img src="assets/moneda.png">
             </div>
         </div>
-    </main>    
+    </header>    
+    <main>
+        <button class="btn-crear" (click)="mostrarFormularioCreacion()">Crear</button>
+            <div class="pantalla-principal">
+                <div *ngFor="let xuxemon of xuxemonsArray;  let i = index" class="contenedor">
+                    <p style="font-size: 19px;">{{ xuxemon.tamano }}</p>
+                    <img [src]="xuxemon.img">
+                <div class="texto-container">
+                    <p style="font-size: 22px;">{{ xuxemon.nombre }}</p>
+                    <p *ngIf="xuxemon.tipo === 'Tierra'" style="font-size: 20px; color: rgb(167, 131, 84);">{{ xuxemon.tipo }}</p>
+                    <p *ngIf="xuxemon.tipo === 'Agua'" style="font-size: 20px; color: rgb(60, 180, 250);">{{ xuxemon.tipo }}</p>
+                    <p *ngIf="xuxemon.tipo === 'Fuego'" style="font-size: 20px; color: rgb(248, 81, 59);">{{ xuxemon.tipo }}</p>
+                </div>
+                <div class="botones-admin">
+                    <a><button class="btn-edit" (click)="mostrarFormularioEdicion(xuxemon)">Editar</button></a>
+                    <a><button class="btn-delete" (click)="eliminarXuxemon(i)">Eliminar</button></a>
+                </div>
+                </div>
+            </div>
+
+            <div *ngIf="formularioEdicionVisible" class="formulario-overlay">
+              <div class="formulario-container">
+                <div class="formulario-edicion">
+                <h2>Editar Xuxemon</h2>
+              <form>
+                <div>
+                  <label for="nombre">Nombre:</label>
+                  <input type="text" id="nombre" [(ngModel)]="xuxemonEditado.nombre" name="nombre" required>
+                </div>
+                <div>
+                  <label for="tipo">Tipo:</label>
+                  <select id="tipo" [(ngModel)]="xuxemonEditado.tipo" name="tipo" required>
+                    <option value="Tierra">Tierra</option>
+                    <option value="Agua">Agua</option>
+                    <option value="Fuego">Fuego</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="tamano">Tamaño:</label>
+                  <input type="text" id="tamano" [(ngModel)]="xuxemonEditado.tamano" name="tamano" required>
+                </div>
+                <div>
+                  <label for="imagen">Imagen URL:</label>
+                  <input type="text" id="imagen" [(ngModel)]="xuxemonEditado.img" name="imagen" required>
+                </div>
+                <button type="submit" (click)="actualizarXuxemon()">Actualizar</button>
+                <button type="button" (click)="cerrarFormularioEdicion()">Cerrar</button>
+              </form>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="formularioCreacionVisible" class="formulario-overlay">
+            <div class="formulario-container">
+              <div class="formulario-edicion">
+                <h2>Crear Xuxemon</h2>
+                <form (ngSubmit)="crearXuxemon()">
+                  <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" [(ngModel)]="nuevoXuxemon.nombre" name="nombre" placeholder="Nombre" required>
+                  </div>
+                  <div>
+                    <label for="tipo">Tipo:</label>
+                    <select id="tipo" [(ngModel)]="nuevoXuxemon.tipo" name="tipo" required>
+                      <option value="Tierra">Tierra</option>
+                      <option value="Agua">Agua</option>
+                      <option value="Fuego">Fuego</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="tamano">Tamaño:</label>
+                    <input type="text" id="tamano" [(ngModel)]="nuevoXuxemon.tamano" placeholder="Tamaño" name="tamano" required>
+                  </div>
+                  <div>
+                    <label for="imagen">Imagen URL:</label>
+                    <input type="text" id="imagen" [(ngModel)]="nuevoXuxemon.img" name="imagen" placeholder="Imagen URL" required>
+                  </div>
+                  <button type="submit">Crear</button>
+                  <button type="button" (click)="cerrarFormularioCreacion()">Cerrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+    </main>
 </body>
 </html>

@@ -7,6 +7,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { PantallaPrincipalComponent } from './pantalla-principal/pantalla-principal.component';
 import { PantallaPrincipalAdminComponent } from './pantalla-principal-admin/pantalla-principal-admin.component';
 import { PantallaColeccionComponent } from './pantalla-coleccion/pantalla-coleccion.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PantallaColeccionComponent } from './pantalla-coleccion/pantalla-colecc
     PantallaColeccionComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
