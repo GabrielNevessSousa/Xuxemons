@@ -29,23 +29,25 @@
         <button class="btn-crear-rand" (click)="crearXuxemonRandom()">Crear random</button>
         </div>
             <div class="pantalla-principal">
-                <div *ngFor="let xuxemon of xuxemonsArray;  let i = index" class="contenedor">
+              <div *ngFor="let xuxemon of xuxemonsArray;  let i = index" class="contenedor">
                   <div class="texto-x">
-                    <p style="font-size: 19px">{{ xuxemon.tamano }}</p>
+                      <p style="font-size: 19px">{{ xuxemon.tamano }}</p>
                   </div>
-                    <img [src]="xuxemon.img" [ngClass]="{'imagen-pequena': xuxemon.tamano === 'Pequeño', 'imagen-mediana': xuxemon.tamano === 'Mediano', 'imagen-grande': xuxemon.tamano === 'Grande'}">
-                <div class="texto-container">
-                    <p style="font-size: 22px;">{{ xuxemon.nombre }}</p>
-                    <p *ngIf="xuxemon.tipo === 'Tierra'" style="font-size: 20px; color: rgb(167, 131, 84);">{{ xuxemon.tipo }}</p>
-                    <p *ngIf="xuxemon.tipo === 'Agua'" style="font-size: 20px; color: rgb(60, 180, 250);">{{ xuxemon.tipo }}</p>
-                    <p *ngIf="xuxemon.tipo === 'Fuego'" style="font-size: 20px; color: rgb(248, 81, 59);">{{ xuxemon.tipo }}</p>
-                </div>
-                <div class="botones-admin">
-                    <a><button class="btn-edit" (click)="mostrarFormularioEdicion(xuxemon)">Editar</button></a>
-                    <a><button class="btn-delete" (click)="eliminarXuxemon(i)">Eliminar</button></a>
-                </div>
-                </div>
-            </div>
+                  <div class="imagen-container">
+                      <img [src]="xuxemon.img" [ngClass]="{'imagen-pequena': xuxemon.tamano === 'Pequeño', 'imagen-mediana': xuxemon.tamano === 'Mediano', 'imagen-grande': xuxemon.tamano === 'Grande'}">
+                  </div>
+                  <div class="texto-container">
+                      <p style="font-size: 22px;">{{ xuxemon.nombre }}</p>
+                      <p *ngIf="xuxemon.tipo === 'Tierra'" style="font-size: 20px; color: rgb(167, 131, 84);">{{ xuxemon.tipo }}</p>
+                      <p *ngIf="xuxemon.tipo === 'Agua'" style="font-size: 20px; color: rgb(60, 180, 250);">{{ xuxemon.tipo }}</p>
+                      <p *ngIf="xuxemon.tipo === 'Fuego'" style="font-size: 20px; color: rgb(248, 81, 59);">{{ xuxemon.tipo }}</p>
+                  </div>
+                  <div class="botones-admin">
+                      <a><button class="btn-edit" (click)="mostrarFormularioEdicion(xuxemon)">Editar</button></a>
+                      <a><button class="btn-delete" (click)="eliminarXuxemon(i)">Eliminar</button></a>
+                  </div>
+              </div>
+          </div>
 
             <div *ngIf="formularioEdicionVisible" class="formulario-overlay">
               <div class="formulario-container">
@@ -113,3 +115,4 @@
     </main>
 </body>
 </html>
+

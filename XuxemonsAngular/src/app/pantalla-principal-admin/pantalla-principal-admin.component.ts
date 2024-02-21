@@ -78,6 +78,7 @@ export class PantallaPrincipalAdminComponent implements OnInit {
     // Elimina el Xuxemon del array
     this.xuxemonsArray.splice(index, 1);
   }
+  
   crearXuxemonRandom() {  
     // Selecciona un índice aleatorio dentro del rango de la lista de Xuxemons disponibles
     const indiceAleatorio = Math.floor(Math.random() * this.xuxemonsArray.length);
