@@ -24,11 +24,16 @@
         </div>
     </header>    
     <main>
+      <div class="botones-crear">
         <button class="btn-crear" (click)="mostrarFormularioCreacion()">Crear</button>
+        <button class="btn-crear-rand" (click)="crearXuxemonRandom()">Crear random</button>
+        </div>
             <div class="pantalla-principal">
                 <div *ngFor="let xuxemon of xuxemonsArray;  let i = index" class="contenedor">
-                    <p style="font-size: 19px;">{{ xuxemon.tamano }}</p>
-                    <img [src]="xuxemon.img">
+                  <div class="texto-x">
+                    <p style="font-size: 19px">{{ xuxemon.tamano }}</p>
+                  </div>
+                    <img [src]="xuxemon.img" [ngClass]="{'imagen-pequena': xuxemon.tamano === 'Pequeño', 'imagen-mediana': xuxemon.tamano === 'Mediano', 'imagen-grande': xuxemon.tamano === 'Grande'}">
                 <div class="texto-container">
                     <p style="font-size: 22px;">{{ xuxemon.nombre }}</p>
                     <p *ngIf="xuxemon.tipo === 'Tierra'" style="font-size: 20px; color: rgb(167, 131, 84);">{{ xuxemon.tipo }}</p>

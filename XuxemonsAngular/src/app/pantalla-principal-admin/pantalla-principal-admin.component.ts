@@ -16,8 +16,7 @@ export class PantallaPrincipalAdminComponent implements OnInit {
     {nombre: 'Otto',tipo: 'Agua',tamano: 'Pequeño',img: 'assets/otto.png'},
     {nombre: 'Xocas',tipo: 'Tierra',tamano: 'Mediano',img: 'assets/xocas.png'},
     {nombre: 'Krokolisko',tipo: 'Agua',tamano: 'Grande',img: 'assets/krokolisko.png'},
-    {nombre: 'Elgominas',tipo: 'Tierra',tamano: 'Mediano',img: 'assets/elgominas.png'},
-    {nombre: 'Pinchimott',tipo: 'Agua',tamano: 'Mediano',img: 'assets/pinchimott.png'},
+    {nombre: 'Poson',tipo: 'Agua',tamano: 'Pequeño',img: 'assets/poson.png'},
   ];
   
   xuxemonSeleccionado: Xuxemons = {nombre: '', tipo: '', tamano: '', img: ''};
@@ -79,4 +78,14 @@ export class PantallaPrincipalAdminComponent implements OnInit {
     // Elimina el Xuxemon del array
     this.xuxemonsArray.splice(index, 1);
   }
+  crearXuxemonRandom() {  
+    // Selecciona un índice aleatorio dentro del rango de la lista de Xuxemons disponibles
+    const indiceAleatorio = Math.floor(Math.random() * this.xuxemonsArray.length);
+    // Obtiene el Xuxemon aleatorio
+    const xuxemonAleatorio = this.xuxemonsArray[indiceAleatorio];
+    // Añade el Xuxemon aleatorio a la colección de usuarios
+    this.xuxemonsArray.push({ ...xuxemonAleatorio });
+  }
+
 }
+

@@ -63,10 +63,10 @@ header {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    font-family: "Noto Sans", sans-serif;
 }
 
 .contenedor img {
-    width: 130px;
     margin-bottom: 10px;
 }
 
@@ -77,11 +77,16 @@ header {
     width: 200px;
     height: 60px;
     padding: 10px;
+    justify-content: end;
 }
 .texto-container p {
     color: black;
     margin: 10px;
     margin-top: -1px;
+}
+
+.texto-x p{
+    justify-content: start;
 }
 
 .contenedor button {
@@ -90,6 +95,7 @@ header {
 
 .botones-admin {
     padding: 20px;
+    justify-content: end;
 }
 
 .botones-admin a {
@@ -127,7 +133,7 @@ header {
 .btn-crear {
     margin: 10px;
     width: 100px;
-    height: 50px;
+    height: 70px;
     font-size: 25px;
     background-color: #C89CFF;
     color: white;
@@ -136,6 +142,25 @@ header {
     font-family: "Luckiest Guy", cursive;
 }
 
+.btn-crear-rand {
+    margin: 10px;
+    width: 120px;
+    height: 70px;
+    font-size: 23px;
+    background-color: #C89CFF;
+    color: white;
+    cursor: pointer;
+    border-style: none;
+    font-family: "Luckiest Guy", cursive;
+}
+
+.botones-crear {
+    display: flex;
+}
+
+
+
+/*FONTS*/
 .luckiest-guy-regular {
     font-family: "Luckiest Guy", cursive;
     font-weight: 400;
@@ -144,7 +169,14 @@ header {
     text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-
+.noto-sans {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal; /* Aquí debes especificar el peso de la fuente, por ejemplo: bold, normal, etc. */
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+}
 
 
 
@@ -218,4 +250,15 @@ header {
   
   .formulario-edicion button[type="submit"]:hover {
     background-color: #ae71f8;
+  }
+
+
+  .imagen-pequena {
+    width: 60px;
+  }
+  .imagen-mediana {
+    width: 100px;
+  } 
+  .imagen-grande {
+    width: 140px;
   }
