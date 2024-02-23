@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Xuxemons } from '../models/xuxemons-model';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-pantalla-principal-admin',
@@ -7,26 +8,97 @@ import { Xuxemons } from '../models/xuxemons-model';
   styleUrls: ['./pantalla-principal-admin.component.css']
 })
 export class PantallaPrincipalAdminComponent implements OnInit {
-  
-  xuxemonsArray: Xuxemons[] = [
-    {nombre: 'Apleki',tipo: 'Tierra',tamano: 'Pequeño',img: 'assets/apleki.png'},
-    {nombre: 'Elconchudo',tipo: 'Tierra',tamano: 'Grande',img: 'assets/elconchudo.png'},
-    {nombre: 'Quakko',tipo: 'Agua',tamano: 'Mediano',img: 'assets/quakko.png'},
-    {nombre: 'Shelly',tipo: 'Agua',tamano: 'Mediano',img: 'assets/shelly.png'},
-    {nombre: 'Otto',tipo: 'Agua',tamano: 'Pequeño',img: 'assets/otto.png'},
-    {nombre: 'Xocas',tipo: 'Tierra',tamano: 'Mediano',img: 'assets/xocas.png'},
-    {nombre: 'Krokolisko',tipo: 'Agua',tamano: 'Grande',img: 'assets/krokolisko.png'},
-    {nombre: 'Poson',tipo: 'Agua',tamano: 'Pequeño',img: 'assets/poson.png'},
-  ];
-  
+
+  XuxemonsArray : any[] = [];
+  isResultLoaded = false;
+  isUpdateFromActive = false;
+
+  nombre: string="";
+  tipo: string="";
+  img: string="";
+  tamano: string="";
+  id_xuxemon: any;
+
+constructor(private http: HttpClient) {
+  this.getAllXuxemons();
+}
+
+getAllXuxemons() {
+  this.http.get("http://127.0.0.1:8000/api/xuxemons")
+  .subscribe((resultData: any)=>
+  {
+    this.isResultLoaded = true;
+    console.log(resultData);
+    this.XuxemonsArray = resultData;
+  }
+
+  )
+}
+
+register() {
+  let bodyData = {
+    "id_xuxemon" : 3,
+    "nombre" : this.nombre,
+    "tipo" : this.tipo,
+    "img" : this.img,
+    "tamano" : this.tamano,
+  };
+
+  this.http.post("http://127.0.0.1:8000/api/save", bodyData).subscribe((resultData: any)=>
+  {
+    console.log(resultData);
+    alert("xuxemon registrado correctamente")
+    this.getAllXuxemons();
+    this.nombre = '';
+    this.tipo = '';
+    this.img = '';
+    this.tamano = '';
+  }
+
+  )
+}
+save(){
+  this.register();
+}
+
+setUpdate(data: any){
+  this.nombre = data.nombre;
+  this.tipo = data.tipo;
+  this.tamano = data.tamano;
+  this.img = data.img;
+  this.id_xuxemon = data.id_xuxemon;
+}
+
+UpdateRecords() {
+  let bodyData = {
+    "nombre" : this.nombre,
+    "tipo" : this.tipo,
+    "img" : this.img,
+    "tamano" : this.tamano,
+  };
+
+  this.http.put("http://127.0.0.1:8000/api/update", bodyData).subscribe((resultData: any)=>
+  {
+    console.log(resultData);
+    alert("xuxemon registrado correctamente")
+    this.getAllXuxemons();
+    this.nombre = '';
+    this.tipo = '';
+    this.img = '';
+    this.tamano = '';
+  }
+  )
+
+}
+
+
   xuxemonSeleccionado: Xuxemons = {nombre: '', tipo: '', tamano: '', img: ''};
   xuxemonEditado: Xuxemons = {nombre: '', tipo: '', tamano: '', img: ''}; // Almacena los datos editados del Xuxemon
   formularioEdicionVisible: boolean = false; // Indica si el formulario de edición está visible
 
-  nuevoXuxemon: Xuxemons = { nombre: '', tipo: '', tamano: '', img: '' };
+  nuevoXuxemon: Xuxemons = {nombre: '', tipo: '', tamano: '', img: '' };
   formularioCreacionVisible: boolean = false;
 
-  constructor() { }
 
   ngOnInit(): void {
   }
@@ -50,13 +122,13 @@ export class PantallaPrincipalAdminComponent implements OnInit {
   }
 
   cerrarFormularioCreacion() {
-    this.nuevoXuxemon = { nombre: '', tipo: '', tamano: '', img: '' };
+    this.nuevoXuxemon = {nombre: '', tipo: '', tamano: '', img: '' };
     this.formularioCreacionVisible = false;
   }
 
   crearXuxemon() {
     if (this.nuevoXuxemon.nombre && this.nuevoXuxemon.tipo && this.nuevoXuxemon.tamano && this.nuevoXuxemon.img) {
-      this.xuxemonsArray.push({ ...this.nuevoXuxemon });
+      this.XuxemonsArray.push({ ...this.nuevoXuxemon });
       this.cerrarFormularioCreacion();
     } else {
       // Manejo de errores o mensajes de validación
@@ -65,10 +137,10 @@ export class PantallaPrincipalAdminComponent implements OnInit {
 
   actualizarXuxemon() {
     // Encuentra el índice del Xuxemon en el array
-    const index = this.xuxemonsArray.findIndex(x => x === this.xuxemonSeleccionado);
+    const index = this.XuxemonsArray.findIndex(x => x === this.xuxemonSeleccionado);
     if (index !== -1) {
       // Actualiza el Xuxemon con los nuevos datos
-      this.xuxemonsArray[index] = { ...this.xuxemonEditado };
+      this.XuxemonsArray[index] = { ...this.xuxemonEditado };
       // Cierra el formulario de edición
       this.cerrarFormularioEdicion();
     }
@@ -76,16 +148,16 @@ export class PantallaPrincipalAdminComponent implements OnInit {
 
   eliminarXuxemon(index: number) {
     // Elimina el Xuxemon del array
-    this.xuxemonsArray.splice(index, 1);
+    this.XuxemonsArray.splice(index, 1);
   }
   
   crearXuxemonRandom() {  
     // Selecciona un índice aleatorio dentro del rango de la lista de Xuxemons disponibles
-    const indiceAleatorio = Math.floor(Math.random() * this.xuxemonsArray.length);
+    const indiceAleatorio = Math.floor(Math.random() * this.XuxemonsArray.length);
     // Obtiene el Xuxemon aleatorio
-    const xuxemonAleatorio = this.xuxemonsArray[indiceAleatorio];
+    const xuxemonAleatorio = this.XuxemonsArray[indiceAleatorio];
     // Añade el Xuxemon aleatorio a la colección de usuarios
-    this.xuxemonsArray.push({ ...xuxemonAleatorio });
+    this.XuxemonsArray.push({ ...xuxemonAleatorio });
   }
 
 }
