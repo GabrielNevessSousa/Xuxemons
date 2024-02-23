@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pantalla-principal',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PantallaPrincipalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {}
+
+  redireccionarComponente(ruta: string) {
+    this.router.navigate([ruta]);
+  }
 
   ngOnInit(): void {
   }
+  
 
 }

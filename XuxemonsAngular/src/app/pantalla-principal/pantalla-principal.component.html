@@ -25,7 +25,32 @@
     </header>    
     <main>
         <div class="pantalla-principal">
-           <p>Hola usuario</p>
+           <div class="botones">
+                <div class="boton-texto" (click)="redireccionarComponente('/xuxedex')">
+                    <div class="boton">
+                        <img src="assets/xuxedex.png">
+                    </div>
+                    <p class="texto-boton">XUXEDEX</p>
+                </div>
+                <div class="boton-texto" (click)="redireccionarComponente('/tienda')">
+                    <div class="boton">
+                        <img src="assets/store.png">
+                    </div>
+                    <p class="texto-boton">TIENDA</p>
+                </div>
+                <div class="boton-texto" (click)="redireccionarComponente('/hospital')">
+                    <div class="boton">
+                        <img src="assets/hospital.png">
+                    </div>
+                    <p class="texto-boton">HOSPITAL</p>
+                </div>
+                <div class="boton-texto" (click)="redireccionarComponente('/inventario')">
+                    <div class="boton">
+                        <img src="assets/bag.png">
+                    </div>
+                    <p class="texto-boton">INVENTARIO</p>
+                </div>
+           </div>
         </div>
     </main>
 </body>

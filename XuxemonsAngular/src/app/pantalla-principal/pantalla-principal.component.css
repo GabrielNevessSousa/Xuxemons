@@ -43,3 +43,31 @@ header {
     width: 100px;
     height: 100px;
 }
+
+.botones {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton-texto {
+    text-align: center;
+    font-family: "Luckiest Guy", cursive;
+}
+
+.boton {
+    justify-content: center; 
+    align-items: center;
+    background-color: white;
+    margin: 20px;
+    border-radius: 40px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.boton img {
+    margin-top: 20px;
+    padding: 20px;
+    height: 300px;
+}
