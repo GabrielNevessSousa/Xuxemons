@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PantallaPrincipalComponent } from './pantalla-principal/pantalla-principal.component';
 import { PantallaColeccionComponent } from './pantalla-coleccion/pantalla-coleccion.component';
+import { PantallaPrincipalAdminComponent } from './pantalla-principal-admin/pantalla-principal-admin.component';
 
 const routes: Routes = [
   { 
@@ -11,6 +12,10 @@ const routes: Routes = [
   { 
     path: 'pag-principal', 
     component:  PantallaPrincipalComponent,
+  },
+  { 
+    path: 'pag-principal-admin', 
+    component:  PantallaPrincipalAdminComponent,
   },
   { 
     path: 'xuxedex', 
