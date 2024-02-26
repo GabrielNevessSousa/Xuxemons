@@ -56,11 +56,11 @@
               <form>
                 <div>
                   <label for="nombre">Nombre:</label>
-                  <input type="text" id="nombre" [(ngModel)]="xuxemonEditado.nombre" name="nombre" required>
+                  <input type="text" id="nombre" [(ngModel)]="xuxemonEditado.nombre" name="nombre">
                 </div>
                 <div>
                   <label for="tipo">Tipo:</label>
-                  <select id="tipo" [(ngModel)]="xuxemonEditado.tipo" name="tipo" required>
+                  <select id="tipo" [(ngModel)]="xuxemonEditado.tipo" name="tipo">
                     <option value="Tierra">Tierra</option>
                     <option value="Agua">Agua</option>
                     <option value="Fuego">Fuego</option>
@@ -68,13 +68,13 @@
                 </div>
                 <div>
                   <label for="tamano">Tamaño:</label>
-                  <input type="text" id="tamano" [(ngModel)]="xuxemonEditado.tamano" name="tamano" required>
+                  <input type="text" id="tamano" [(ngModel)]="xuxemonEditado.tamano" name="tamano">
                 </div>
                 <div>
                   <label for="imagen">Imagen URL:</label>
-                  <input type="text" id="imagen" [(ngModel)]="xuxemonEditado.img" name="imagen" required>
+                  <input type="text" id="imagen" [(ngModel)]="xuxemonEditado.img" name="imagen">
                 </div>
-                <button type="submit" (click)="setUpdate(xuxemonEditado)">Actualizar</button>
+                <button type="submit" (click)="UpdateRecords(xuxemonEditado)">Actualizar</button>
                 <button type="button" (click)="cerrarFormularioEdicion()">Cerrar</button>
               </form>
               </div>

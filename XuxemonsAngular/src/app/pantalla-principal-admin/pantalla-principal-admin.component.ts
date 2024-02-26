@@ -9,7 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class PantallaPrincipalAdminComponent implements OnInit {
 
-  XuxemonsArray : any[] = [];
+  XuxemonsArray : Xuxemons[] = [];
   isResultLoaded = false;
   isUpdateFromActive = false;
 
@@ -37,50 +37,44 @@ getAllXuxemons() {
 
 register() {
   let bodyData = {
-    "id_xuxemon" : 3,
     "nombre" : this.nombre,
     "tipo" : this.tipo,
     "img" : this.img,
     "tamano" : this.tamano,
   };
 
-  this.http.post("http://127.0.0.1:8000/api/save", bodyData).subscribe((resultData: any)=>
+  this.http.post("http://127.0.0.1:8000/api/xuxemons", bodyData).subscribe((resultData: any)=>
   {
     console.log(resultData);
-    alert("xuxemon registrado correctamente")
+    alert("Xuxemon registrado correctamente");
     this.getAllXuxemons();
     this.nombre = '';
     this.tipo = '';
     this.img = '';
     this.tamano = '';
-  }
-
-  )
+  });
 }
+
 save(){
   this.register();
 }
 
-setUpdate(data: any){
-  this.nombre = data.nombre;
-  this.tipo = data.tipo;
-  this.tamano = data.tamano;
-  this.img = data.img;
-  this.id_xuxemon = data.id_xuxemon;
-}
-
-UpdateRecords() {
+UpdateRecords(data: Xuxemons) {
   let bodyData = {
-    "nombre" : this.nombre,
-    "tipo" : this.tipo,
-    "img" : this.img,
-    "tamano" : this.tamano,
+    "id_xuxemon": data.id_xuxemon,
+    "nombre" : data.nombre,
+    "tipo" : data.tipo,
+    "img" : data.img,
+    "tamano" : data.tamano,
   };
 
-  this.http.put("http://127.0.0.1:8000/api/update", bodyData).subscribe((resultData: any)=>
+  console.log(bodyData);  
+
+  this.http.put("http://127.0.0.1:8000/api/xuxemons" + "/" + bodyData.id_xuxemon, bodyData).subscribe((data: any)=>
   {
-    console.log(resultData);
-    alert("xuxemon registrado correctamente")
+    console.log(data.id_xuxemon);
+    console.log(data);
+    alert("xuxemon actualizado correctamente")
     this.getAllXuxemons();
     this.nombre = '';
     this.tipo = '';
@@ -88,15 +82,24 @@ UpdateRecords() {
     this.tamano = '';
   }
   )
-
 }
 
+setDelete(data: any) {
+  this.http.delete("http://127.0.0.1:8000/api/xuxemons" + "/" + data.id_xuxemon).subscribe((resultData: any)=>
+  {
+    console.log(data.id_xuxemon);
+    console.log(resultData);
+    alert("xuxemon eliminado correctamente")
+    this.getAllXuxemons();
+  }
+  )
+}
 
-  xuxemonSeleccionado: Xuxemons = {nombre: '', tipo: '', tamano: '', img: ''};
-  xuxemonEditado: Xuxemons = {nombre: '', tipo: '', tamano: '', img: ''}; // Almacena los datos editados del Xuxemon
+  xuxemonSeleccionado: Xuxemons = {id_xuxemon: 0,nombre: '', tipo: '', tamano: '', img: ''};
+  xuxemonEditado: Xuxemons = {id_xuxemon: 0,nombre: '', tipo: '', tamano: '', img: ''}; // Almacena los datos editados del Xuxemon
   formularioEdicionVisible: boolean = false; // Indica si el formulario de edición está visible
 
-  nuevoXuxemon: Xuxemons = {nombre: '', tipo: '', tamano: '', img: '' };
+  nuevoXuxemon: Xuxemons = {id_xuxemon: 0,nombre: '', tipo: '', tamano: '', img: '' };
   formularioCreacionVisible: boolean = false;
 
 
@@ -113,7 +116,7 @@ UpdateRecords() {
 
   cerrarFormularioEdicion() {
     // Resetea los datos del Xuxemon editado y oculta el formulario de edición
-    this.xuxemonEditado = { nombre: '', tipo: '', tamano: '', img: '' };
+    this.xuxemonEditado = {id_xuxemon: 0, nombre: '', tipo: '', tamano: '', img: '' };
     this.formularioEdicionVisible = false;
   }
 
@@ -122,7 +125,7 @@ UpdateRecords() {
   }
 
   cerrarFormularioCreacion() {
-    this.nuevoXuxemon = {nombre: '', tipo: '', tamano: '', img: '' };
+    this.nuevoXuxemon = {id_xuxemon: 0,nombre: '', tipo: '', tamano: '', img: '' };
     this.formularioCreacionVisible = false;
   }
 
@@ -159,6 +162,4 @@ UpdateRecords() {
     // Añade el Xuxemon aleatorio a la colección de usuarios
     this.XuxemonsArray.push({ ...xuxemonAleatorio });
   }
-
 }
-
