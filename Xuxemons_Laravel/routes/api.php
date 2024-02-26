@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\XuxemonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('user', [AuthenticationController::class, 'user']);
 });
 
-Route::get('/xuxemons', [App\Http\Controllers\XuxemonController::class, 'index']);
-Route::post('/save', [App\Http\Controllers\XuxemonController::class, 'store']);
-Route::put('/update{id}', [App\Http\Controllers\XuxemonController::class, 'update']);
+Route::get('xuxemons', [XuxemonController::class, 'index']);
+Route::post('xuxemons', [XuxemonController::class, 'store']);
+Route::put('xuxemons/{id}', [XuxemonController::class, 'update']);
+Route::delete('xuxemons/{id}', [XuxemonController::class, 'destroy']);
