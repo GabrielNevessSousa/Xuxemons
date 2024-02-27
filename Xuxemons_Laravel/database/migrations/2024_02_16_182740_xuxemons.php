@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_xuxemon');
             $table->string('nombre');
             $table->string('tipo');
-            $table->string('imagen');
+            $table->string('img')->nullable();
             $table->string('tamano');
             $table->rememberToken();
             $table->timestamps();
@@ -25,6 +25,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+    
     public function down(): void
     {
         Schema::dropIfExists('xuxemons');

@@ -17,7 +17,7 @@ class XuxemonController extends Controller
         $xuxemons = New Xuxemon([
             'nombre' => $request->input(('nombre')),
             'tipo' => $request->input(('tipo')),
-            'imagen' => $request->input(('imagen')),
+            'img' => $request->input(('img')),
             'tamano' => $request->input(('tamano')),
         ]);
         $xuxemons->save();
@@ -30,7 +30,7 @@ class XuxemonController extends Controller
                 'nombre' => 'required|string',
                 'tipo' => 'required|string',
                 'tamano' => 'required|string',
-                'imagen' => 'string',
+                'img' => 'string',
             ]
             );
             $xuxemons = Xuxemon::find($id);
@@ -38,7 +38,7 @@ class XuxemonController extends Controller
                 'nombre' => $request->input('nombre'),
                 'tipo' => $request->input('tipo'),
                 'tamano' => $request->input('tamano'),
-                'imagen' => $request->input('imagen'),
+                'img' => $request->input('img'),
             ]);
 
             return response()->json('xuxemon actualitzat', 200);

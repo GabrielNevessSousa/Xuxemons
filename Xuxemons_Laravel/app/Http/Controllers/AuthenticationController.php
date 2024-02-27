@@ -25,38 +25,43 @@ class AuthenticationController extends Controller
     }
 
     public function login(Request $request){
-
-        if (!Auth::attempt($request->only(['email', 'password']))) {
-            return response([
-                'message' => 'invalid credentials'
+        try {
+            $request->validate([
+                'email' => 'required|string',
+                'password' => 'required',
             ]);
+    
+            if (!Auth::attempt($request->only(['email', 'password']))) {
+                 return response()->json(['error' => 'invalid credencialss'], 404);
+            }
+    
+            $user = Auth::user();
+            $token = $user->createToken('token')->plainTextToken;
+    
+            return response()->json(['succes' => $token], 200);
+        } catch (ModelNotFoundException $e) {
+            // Puedes personalizar el manejo de ModelNotFoundException aquí
+            return response()->json(['error' => 'usuari no encontrado'], 404);
         }
+    }
+    
 
+    public function redirectToRoleSpecificSite()
+    {
         $user = Auth::user();
 
-        $token = $user->createToken('token')->plainTextToken;
-
-        return $token;
-
-        $cookie = cookie('jwt', $token, 60*24);
-        
-        return response([
-            'message' =>'succes',
-        ])->withCookie($cookie);
-
-        /*
-        return response([
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'created_at' => $user->created_at,
-            'updated_at' => $user->updated_at,
-            'token' => $token->accessToken,
-            'token_expires_at' => $token->token->expires_at,
-        ], 200);
-
-        */
+        if ($user->role === 'admin') {
+            // Puedes incluir un campo "redirect" en tu respuesta JSON
+            return response()->json(['message' => 'Redirigiendo a Dashboard de Admin', 'redirect' => 'admin/dashboard'], 200);
+        } elseif ($user->role === 'usuario') {
+            // Puedes incluir un campo "redirect" en tu respuesta JSON
+            return response()->json(['message' => 'Redirigiendo a Dashboard de Usuario', 'redirect' => 'user/dashboard'], 200);
+        } else {
+            // Puedes incluir un campo "redirect" en tu respuesta JSON
+            return response()->json(['message' => 'Redirigiendo a Dashboard por defecto', 'redirect' => 'default/dashboard'], 200);
+        }
     }
+
 
     public function user(){
 

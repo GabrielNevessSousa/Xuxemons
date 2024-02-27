@@ -29,7 +29,7 @@ class User extends Authenticatable
         'cognom',
         'nick',
         'role',
-        'token',
+        'remember_token',
         
 
     ];

@@ -9,6 +9,6 @@ class Xuxemon extends Model
 {
     protected $table = 'xuxemons';
     protected $primaryKey = 'id_xuxemon';
-    protected $fillable = ['nombre', 'tipo', 'imagen', 'tamano'];
+    protected $fillable = ['nombre', 'tipo', 'img', 'tamano'];
     use HasFactory;
 }

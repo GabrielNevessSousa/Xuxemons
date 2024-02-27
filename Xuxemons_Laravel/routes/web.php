@@ -24,3 +24,4 @@ Route::resource('registre', AuthenticationController::class);
 Route::resource('login', AuthenticationController::class);
 Route::resource('user', AuthenticationController::class);
 
+Route::resource('xuxemons', XuxemonController::class);

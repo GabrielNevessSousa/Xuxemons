@@ -20,18 +20,17 @@ use App\Http\Controllers\XuxemonController;
 Route::group(['middleware' => 'cors'], function () {
 
     Route::post('registre', [AuthenticationController::class, 'store'])->name('registre.store');
-
 });
 
 Route::post('login', [AuthenticationController::class, 'login']);
 
+Route::get('xuxemons', [XuxemonController::class, 'index']);
+Route::post('xuxemons', [XuxemonController::class, 'store']);
+Route::put('xuxemons/{id}', [XuxemonController::class, 'update']);
+Route::delete('xuxemons/{id}', [XuxemonController::class, 'destroy']);
 
 Route::middleware('auth:sanctum')->group( function () {
    
     Route::get('user', [AuthenticationController::class, 'user']);
 });
 
-Route::get('xuxemons', [XuxemonController::class, 'index']);
-Route::post('xuxemons', [XuxemonController::class, 'store']);
-Route::put('xuxemons/{id}', [XuxemonController::class, 'update']);
-Route::delete('xuxemons/{id}', [XuxemonController::class, 'destroy']);
