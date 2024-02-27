@@ -1,0 +1,31 @@
+<body>
+
+    <div class="logo">
+        <a class="eco" ><img style="width: 300px; height: 300px;" src="assets/xuxemons-logo.png"></a>
+</div>
+
+    <div  class="formulario">
+        <h1>Inicio de sesión</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    
+    <div class="name">
+        <input type="email" formControlName="email" name="email"/>
+        <label>Email</label>
+        
+    </div>
+    
+    <div class="name">
+        <input type="password" formControlName="password" name="password"/>
+        <label>Contraseña</label>
+       
+    </div>
+    
+        <button type="submit" [disabled]="!loginForm.valid">Iniciar sesión</button>
+        <div class="iniciar">
+            No tengo cuenta, quiero <a  routerLink="/registro" routerLinkActive="currentPage">registrarme</a>
+        </div>
+    </form>
+</div>
+</body>
+
