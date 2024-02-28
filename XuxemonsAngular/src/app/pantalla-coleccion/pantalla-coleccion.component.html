@@ -16,7 +16,7 @@
         <div class="pantalla-principal">
             <div *ngFor="let xuxemon of xuxemonsArray" class="contenedor">
                  <p style="font-size: 19px;">{{ xuxemon.tamano }}</p>
-                 <img [src]="xuxemon.img">
+                 <img [src]="xuxemon.img" >
                  <div class="texto-container">
                      <p style="font-size: 22px;">{{ xuxemon.nombre }}</p>
                      <p *ngIf="xuxemon.tipo === 'Tierra'" style="font-size: 20px; color: rgb(167, 131, 84);">{{ xuxemon.tipo }}</p>
